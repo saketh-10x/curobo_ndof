@@ -1,0 +1,1178 @@
+<?xml version="1.0" ?>
+<robot name="full_robot_v_1_1_sprayer">
+  <link name="swerve_link_x">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.001"/>
+      <inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
+    </inertial>
+  </link>
+  <link name="swerve_link_y">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.001"/>
+      <inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
+    </inertial>
+  </link>
+  <link name="swerve_link_theta">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.001"/>
+      <inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
+    </inertial>
+  </link>
+  <joint name="base_x" type="prismatic">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <parent link="swerve_link_x"/>
+    <child link="swerve_link_y"/>
+    <axis xyz="1 0 0"/>
+    <limit effort="10" velocity="10" lower="-5" upper="5"/>
+  </joint>
+  <joint name="base_y" type="prismatic">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <parent link="swerve_link_y"/>
+    <child link="swerve_link_theta"/>
+    <axis xyz="0 1 0"/>
+    <limit effort="10" velocity="10" lower="-5" upper="5"/>
+  </joint>
+  <joint name="base_theta" type="revolute">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <parent link="swerve_link_theta"/>
+    <child link="base_link"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.141592653589793" upper="3.141592653589793"/>
+  </joint>
+  <link name="base_link">
+    <inertial>
+      <origin xyz="-0.0648528 -0.0478562 0.114871" rpy="0 0 0"/>
+      <mass value="491.809"/>
+      <inertia ixx="64.8045" ixy="1.10529" ixz="-3.93658" iyy="80.7161" iyz="7.72562" izz="42.126"/>
+    </inertial>
+    <visual>
+      <origin xyz="-0.0648528 -0.0478562 0.114871" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="/home/sim-system/sim_ws/src/10xSim/version_system/config/current/meshes/base_link_visual.stl"/>
+      </geometry>
+      <material name="base_link_parts_material">
+        <color rgba="0.73784 0.775428 0.826714 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0648528 -0.0478562 0.114871" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="/home/sim-system/sim_ws/src/10xSim/version_system/config/current/meshes/base_link_collision.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="lidar_nav_mount">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="lidar_nav_mount_frame" type="fixed">
+    <origin xyz="-0.376 -0.326 1.4136" rpy="6.69535e-17 -7.93578e-15 -3.14159"/>
+    <parent link="base_link"/>
+    <child link="lidar_nav_mount"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <link name="livox_amr_imu_mount"/>
+  <joint name="lidar_imu_frame" type="fixed">
+    <origin xyz="-0.376 -0.326 1.4136" rpy="6.69535e-17 -7.93578e-15 -3.14159"/>
+    <parent link="base_link"/>
+    <child link="livox_amr_imu_mount"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <link name="lidarrl_mount">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="lidarrl_mount_frame" type="fixed">
+    <origin xyz="-0.392639 0.349545 -0.3422" rpy="-3.14159 -1.04921e-16 1.5708"/>
+    <parent link="base_link"/>
+    <child link="lidarrl_mount"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <link name="lidarrr_mount">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="lidarrr_mount_frame" type="fixed">
+    <origin xyz="-0.4208 -0.396507 -0.3029" rpy="3.14159 2.22294e-16 -1.5708"/>
+    <parent link="base_link"/>
+    <child link="lidarrr_mount"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <link name="lidarfl_mount">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="lidarfl_mount_frame" type="fixed">
+    <origin xyz="0.4208 0.396507 -0.3029" rpy="3.14159 1.66533e-16 1.5708"/>
+    <parent link="base_link"/>
+    <child link="lidarfl_mount"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <link name="lidarfr_mount">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="lidarfr_mount_frame" type="fixed">
+    <origin xyz="0.3855 -0.327 -0.3434" rpy="3.14159 2.83527e-16 -1.5708"/>
+    <parent link="base_link"/>
+    <child link="lidarfr_mount"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Frame dock_frame (dummy link + fixed joint) -->
+  <link name="dock_frame">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="dock_frame_joint" type="fixed">
+    <origin xyz="-0.279 0.089 0.775" rpy="-1.571 0 0"/>
+    <parent link="base_link"/>
+    <child link="dock_frame"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Frame base_footprint (dummy link + fixed joint) -->
+  <link name="base_footprint">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="base_footprint_joint" type="fixed">
+    <origin xyz="0 0 -0.398" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="base_footprint"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <link name="steering_3">
+    <inertial>
+      <origin xyz="0.0323121 6.40761e-05 -0.0747017" rpy="0 0 0"/>
+      <mass value="11.0012"/>
+      <inertia ixx="0.050354" ixy="3.69617e-05" ixz="0.00874843" iyy="0.0544726" iyz="6.07155e-05" izz="0.0334415"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.0323121 6.40761e-05 -0.0747017" rpy="6.65884e-16 4.44089e-16 -1.67147e-13"/>
+      <geometry>
+        <mesh filename="/home/sim-system/sim_ws/src/10xSim/version_system/config/current/meshes/steering_visual.stl"/>
+      </geometry>
+      <material name="steering_parts_material">
+        <color rgba="0.792157 0.819608 0.933333 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0323121 6.40761e-05 -0.0747017" rpy="6.65884e-16 4.44089e-16 -1.67147e-13"/>
+      <geometry>
+        <mesh filename="/home/sim-system/sim_ws/src/10xSim/version_system/config/current/meshes/steering_collision.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="wheel_3">
+    <inertial>
+      <origin xyz="2.03564e-06 2.10727e-05 -0.0356568" rpy="0 0 0"/>
+      <mass value="6.0003"/>
+      <inertia ixx="0.0100876" ixy="1.89695e-06" ixz="-1.36736e-08" iyy="0.0100723" iyz="-8.34504e-07" izz="0.0164279"/>
+    </inertial>
+    <visual>
+      <origin xyz="2.03564e-06 2.10727e-05 -0.0356568" rpy="-1.5708 -1.5708 0"/>
+      <geometry>
+        <mesh filename="/home/sim-system/sim_ws/src/10xSim/version_system/config/current/meshes/wheel_visual.stl"/>
+      </geometry>
+      <material name="wheel_parts_material">
+        <color rgba="0.792157 0.819608 0.933333 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="2.03564e-06 2.10727e-05 -0.0356568" rpy="-1.5708 -1.5708 0"/>
+      <geometry>
+        <mesh filename="/home/sim-system/sim_ws/src/10xSim/version_system/config/current/meshes/wheel_collision.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="wheel_f" type="continuous">
+    <origin xyz="0.0325 4.93508e-15 -0.1511" rpy="1.5708 -3.13617e-16 1.5708"/>
+    <parent link="steering_3"/>
+    <child link="wheel_3"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10"/>
+  </joint>
+  <joint name="steering_f" type="revolute">
+    <origin xyz="0.309 -7.20088e-15 -0.172" rpy="-6.65884e-16 -4.44089e-16 1.67147e-13"/>
+    <parent link="base_link"/>
+    <child link="steering_3"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.141592653589793" upper="3.141592653589793"/>
+  </joint>
+  <link name="steering_2">
+    <inertial>
+      <origin xyz="-0.0323121 -6.40761e-05 -0.0747017" rpy="0 0 0"/>
+      <mass value="11.0012"/>
+      <inertia ixx="0.050354" ixy="3.69617e-05" ixz="-0.00874843" iyy="0.0544726" iyz="-6.07155e-05" izz="0.0334415"/>
+    </inertial>
+    <visual>
+      <origin xyz="-0.0323121 -6.40761e-05 -0.0747017" rpy="1.10731e-27 -6.66134e-15 -1.67147e-13"/>
+      <geometry>
+        <mesh filename="/home/sim-system/sim_ws/src/10xSim/version_system/config/current/meshes/steering_2_visual.stl"/>
+      </geometry>
+      <material name="steering_2_parts_material">
+        <color rgba="0.792157 0.819608 0.933333 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0323121 -6.40761e-05 -0.0747017" rpy="1.10731e-27 -6.66134e-15 -1.67147e-13"/>
+      <geometry>
+        <mesh filename="/home/sim-system/sim_ws/src/10xSim/version_system/config/current/meshes/steering_2_collision.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="wheel_2">
+    <inertial>
+      <origin xyz="2.03564e-06 2.10727e-05 -0.0356568" rpy="0 0 0"/>
+      <mass value="6.0003"/>
+      <inertia ixx="0.0100876" ixy="1.89695e-06" ixz="-1.36736e-08" iyy="0.0100723" iyz="-8.34504e-07" izz="0.0164279"/>
+    </inertial>
+    <visual>
+      <origin xyz="2.03564e-06 2.10727e-05 -0.0356568" rpy="1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="/home/sim-system/sim_ws/src/10xSim/version_system/config/current/meshes/wheel_2_visual.stl"/>
+      </geometry>
+      <material name="wheel_2_parts_material">
+        <color rgba="0.792157 0.819608 0.933333 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="2.03564e-06 2.10727e-05 -0.0356568" rpy="1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="/home/sim-system/sim_ws/src/10xSim/version_system/config/current/meshes/wheel_2_collision.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="wheel_rl" type="continuous">
+    <origin xyz="-0.0325 -4.94049e-15 -0.1511" rpy="-1.5708 1.16743e-16 1.5708"/>
+    <parent link="steering_2"/>
+    <child link="wheel_2"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10"/>
+  </joint>
+  <joint name="steering_rl" type="revolute">
+    <origin xyz="-0.308968 0.254 -0.172" rpy="2.22294e-16 6.58699e-28 1.67147e-13"/>
+    <parent link="base_link"/>
+    <child link="steering_2"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.141592653589793" upper="3.141592653589793"/>
+  </joint>
+  <link name="steering">
+    <inertial>
+      <origin xyz="-0.0323121 -6.40761e-05 -0.0747017" rpy="0 0 0"/>
+      <mass value="11.0012"/>
+      <inertia ixx="0.050354" ixy="3.69617e-05" ixz="-0.00874843" iyy="0.0544726" iyz="-6.07155e-05" izz="0.0334415"/>
+    </inertial>
+    <visual>
+      <origin xyz="-0.0323121 -6.40761e-05 -0.0747017" rpy="1.11145e-27 -6.66134e-15 -1.67258e-13"/>
+      <geometry>
+        <mesh filename="/home/sim-system/sim_ws/src/10xSim/version_system/config/current/meshes/steering_3_visual.stl"/>
+      </geometry>
+      <material name="steering_3_parts_material">
+        <color rgba="0.792157 0.819608 0.933333 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0323121 -6.40761e-05 -0.0747017" rpy="1.11145e-27 -6.66134e-15 -1.67258e-13"/>
+      <geometry>
+        <mesh filename="/home/sim-system/sim_ws/src/10xSim/version_system/config/current/meshes/steering_3_collision.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="wheel">
+    <inertial>
+      <origin xyz="2.03564e-06 2.10727e-05 -0.0356568" rpy="0 0 0"/>
+      <mass value="6.0003"/>
+      <inertia ixx="0.0100876" ixy="1.89695e-06" ixz="-1.36736e-08" iyy="0.0100723" iyz="-8.34504e-07" izz="0.0164279"/>
+    </inertial>
+    <visual>
+      <origin xyz="2.03564e-06 2.10727e-05 -0.0356568" rpy="1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="/home/sim-system/sim_ws/src/10xSim/version_system/config/current/meshes/wheel_3_visual.stl"/>
+      </geometry>
+      <material name="wheel_3_parts_material">
+        <color rgba="0.792157 0.819608 0.933333 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="2.03564e-06 2.10727e-05 -0.0356568" rpy="1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="/home/sim-system/sim_ws/src/10xSim/version_system/config/current/meshes/wheel_3_collision.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="wheel_rr" type="continuous">
+    <origin xyz="-0.0325 -4.94049e-15 -0.1511" rpy="-1.5708 -6.7838e-15 1.5708"/>
+    <parent link="steering"/>
+    <child link="wheel"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10"/>
+  </joint>
+  <joint name="steering_rr" type="revolute">
+    <origin xyz="-0.309 -0.254 -0.172" rpy="2.22294e-16 6.61065e-28 1.67258e-13"/>
+    <parent link="base_link"/>
+    <child link="steering"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.141592653589793" upper="3.141592653589793"/>
+  </joint>
+  <link name="liftkit_mid">
+    <inertial>
+      <origin xyz="3.88578e-16 1.7486e-15 -0.451032" rpy="0 0 0"/>
+      <mass value="19.9989"/>
+      <inertia ixx="1.42812" ixy="-2.03958e-16" ixz="-2.57449e-15" iyy="1.42812" iyz="-2.56585e-15" izz="0.125641"/>
+    </inertial>
+    <visual>
+      <origin xyz="3.88578e-16 1.7486e-15 -0.451032" rpy="-5.55112e-17 -6.58779e-28 -1.63534e-13"/>
+      <geometry>
+        <mesh filename="/home/sim-system/sim_ws/src/10xSim/version_system/config/current/meshes/liftkit_mid_visual.stl"/>
+      </geometry>
+      <material name="liftkit_mid_parts_material">
+        <color rgba="0.796078 0.823529 0.937255 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="3.88578e-16 1.7486e-15 -0.451032" rpy="-5.55112e-17 -6.58779e-28 -1.63534e-13"/>
+      <geometry>
+        <mesh filename="/home/sim-system/sim_ws/src/10xSim/version_system/config/current/meshes/liftkit_mid_collision.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="liftkit_top">
+    <inertial>
+      <origin xyz="0.0698225 0.0196093 -0.238001" rpy="0 0 0"/>
+      <mass value="39.156"/>
+      <inertia ixx="2.25138" ixy="0.0292299" ixz="-0.242558" iyy="3.05944" iyz="0.0312664" izz="1.3804"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.0698225 0.0196093 -0.238001" rpy="2.19959e-16 3.40822e-18 -1.63756e-13"/>
+      <geometry>
+        <mesh filename="/home/sim-system/sim_ws/src/10xSim/version_system/config/current/meshes/liftkit_top_visual.stl"/>
+      </geometry>
+      <material name="liftkit_top_parts_material">
+        <color rgba="0.76501 0.813404 0.785794 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0698225 0.0196093 -0.238001" rpy="2.19959e-16 3.40822e-18 -1.63756e-13"/>
+      <geometry>
+        <mesh filename="/home/sim-system/sim_ws/src/10xSim/version_system/config/current/meshes/liftkit_top_collision.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="lidar_mani">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="lidar_mani_frame" type="fixed">
+    <origin xyz="0.44209 0.0302987 0.0755" rpy="-1.5708 -4.81013e-15 1.44862"/>
+    <parent link="liftkit_top"/>
+    <child link="lidar_mani"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <link name="fisheye_mount">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="fisheye_mount_frame" type="fixed">
+    <origin xyz="0.432927 0.0613677 -0.027393" rpy="-1.42244 5.97647e-16 -3.96926e-15"/>
+    <parent link="liftkit_top"/>
+    <child link="fisheye_mount"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Frame fisheye_optical (dummy link + fixed joint) -->
+  <link name="fisheye_optical">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="fisheye_optical_frame" type="fixed">
+    <origin xyz="0.432927 0.0613677 -0.027393" rpy="4.04336e-15 1.42244 1.5708"/>
+    <parent link="liftkit_top"/>
+    <child link="fisheye_optical"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <link name="arm_mount">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="arm_mount_frame" type="fixed">
+    <origin xyz="-1.10944e-07 0.104999 -0.24" rpy="0.0 3.14159 -1.5708"/>
+    <parent link="liftkit_top"/>
+    <child link="arm_mount"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <link name="shutter_fisheye">
+    <inertial>
+      <origin xyz="-0.0400487 0.00225187 0.0264" rpy="0 0 0"/>
+      <mass value="0.0218639"/>
+      <inertia ixx="1.02426e-05" ixy="-9.17105e-07" ixz="2.07942e-13" iyy="2.10915e-05" iyz="-2.15035e-14" izz="1.2459e-05"/>
+    </inertial>
+    <visual>
+      <origin xyz="-0.0400487 0.00225187 0.0264" rpy="-3.14159 -5.78245e-17 1.63755e-13"/>
+      <geometry>
+        <mesh filename="/home/sim-system/sim_ws/src/10xSim/version_system/config/current/meshes/shutter_fisheye_visual.stl"/>
+      </geometry>
+      <material name="shutter_fisheye_material">
+        <color rgba="0.615686 0.811765 0.929412 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0400487 0.00225187 0.0264" rpy="-3.14159 -5.78245e-17 1.63755e-13"/>
+      <geometry>
+        <mesh filename="/home/sim-system/sim_ws/src/10xSim/version_system/config/current/meshes/shutter_fisheye_collision.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="shutter_fisheye" type="fixed">
+    <origin xyz="0.381875 0.0599991 -0.003875" rpy="3.14159 -5.44162e-17 -1.83523e-18"/>
+    <parent link="liftkit_top"/>
+    <child link="shutter_fisheye"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="0" upper="2.87979"/>
+  </joint>
+  <link name="shutter_lidarmani">
+    <inertial>
+      <origin xyz="-0.0419642 0.0376021 0.0263998" rpy="0 0 0"/>
+      <mass value="0.0689571"/>
+      <inertia ixx="8.71394e-05" ixy="2.27264e-05" ixz="8.05335e-10" iyy="0.000138378" iyz="1.42382e-10" izz="9.61609e-05"/>
+    </inertial>
+    <visual>
+      <origin xyz="-0.0419642 0.0376021 0.0263998" rpy="-1.5708 0.122173 5.82584e-17"/>
+      <geometry>
+        <mesh filename="/home/sim-system/sim_ws/src/10xSim/version_system/config/current/meshes/shutter_lidarmani_visual.stl"/>
+      </geometry>
+      <material name="shutter_lidarmani_material">
+        <color rgba="0.615686 0.811765 0.929412 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0419642 0.0376021 0.0263998" rpy="-1.5708 0.122173 5.82584e-17"/>
+      <geometry>
+        <mesh filename="/home/sim-system/sim_ws/src/10xSim/version_system/config/current/meshes/shutter_lidarmani_collision.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="shutter_lidarmani" type="fixed">
+    <origin xyz="0.470497 0.0532579 0.1325" rpy="1.5708 6.04482e-16 -0.122173"/>
+    <parent link="liftkit_top"/>
+    <child link="shutter_lidarmani"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="0" upper="1.65806"/>
+  </joint>
+  <joint name="liftkit_top" type="prismatic">
+    <origin xyz="0 0 0.0459" rpy="-2.7547e-16 -3.40822e-18 2.22044e-16"/>
+    <parent link="liftkit_mid"/>
+    <child link="liftkit_top"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="0" upper="0.7"/>
+    <mimic joint="liftkit_mid" multiplier="1.0" offset="0.0"/>
+  </joint>
+  <joint name="liftkit_mid" type="prismatic">
+    <origin xyz="-0.279 -0.0160002 0.9691" rpy="5.55112e-17 6.49701e-28 1.63534e-13"/>
+    <parent link="base_link"/>
+    <child link="liftkit_mid"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="0" upper="0.7"/>
+  </joint>
+
+  <!-- UR10e Sander Robot Integration -->
+  <!-- Joint connecting arm_mount to arm_base_link -->
+  <joint name="chassis_arm_base_joint" type="fixed">
+    <origin xyz="0.0 0.0 0.0" rpy="1.5708 0.0 1.5707963267948966"/>
+    <parent link="arm_mount"/>
+    <child link="arm_base_link"/>
+  </joint>
+
+  <!-- UR10e ros2_control configuration -->
+  <ros2_control name="ur10e" type="system">
+    <hardware>
+      <plugin>ur_robot_driver/URPositionHardwareInterface</plugin>
+      <param name="robot_ip">__ROBOT_IP__</param>
+      <param name="script_filename">__SCRIPT_FILENAME__</param>
+      <param name="output_recipe_filename">__OUTPUT_RECIPE_FILENAME__</param>
+      <param name="input_recipe_filename">__INPUT_RECIPE_FILENAME__</param>
+      <param name="headless_mode">False</param>
+      <param name="reverse_port">50001</param>
+      <param name="script_sender_port">50002</param>
+      <param name="reverse_ip">0.0.0.0</param>
+      <param name="script_command_port">50004</param>
+      <param name="trajectory_port">50003</param>
+      <param name="tf_prefix"></param>
+      <param name="non_blocking_read">True</param>
+      <param name="servoj_gain">2000</param>
+      <param name="servoj_lookahead_time">0.03</param>
+      <param name="use_tool_communication">False</param>
+      <param name="kinematics/hash">__KINEMATICS_HASH__</param>
+      <param name="tool_voltage">0</param>
+      <param name="tool_parity">0</param>
+      <param name="tool_baud_rate">115200</param>
+      <param name="tool_stop_bits">1</param>
+      <param name="tool_rx_idle_chars">1.5</param>
+      <param name="tool_tx_idle_chars">3.5</param>
+      <param name="tool_device_name">/tmp/ttyUR</param>
+      <param name="tool_tcp_port">54321</param>
+      <param name="keep_alive_count">2</param>
+    </hardware>
+    <joint name="shoulder_pan_joint">
+      <command_interface name="position"/>
+      <command_interface name="velocity"/>
+      <state_interface name="position">
+        <!-- initial position for the FakeSystem and simulation -->
+        <param name="initial_value">0.0</param>
+      </state_interface>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+    <joint name="shoulder_lift_joint">
+      <command_interface name="position"/>
+      <command_interface name="velocity"/>
+      <state_interface name="position">
+        <!-- initial position for the FakeSystem and simulation -->
+        <param name="initial_value">-1.57</param>
+      </state_interface>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+    <joint name="elbow_joint">
+      <command_interface name="position"/>
+      <command_interface name="velocity"/>
+      <state_interface name="position">
+        <!-- initial position for the FakeSystem and simulation -->
+        <param name="initial_value">0.0</param>
+      </state_interface>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+    <joint name="wrist_1_joint">
+      <command_interface name="position"/>
+      <command_interface name="velocity"/>
+      <state_interface name="position">
+        <!-- initial position for the FakeSystem and simulation -->
+        <param name="initial_value">-1.57</param>
+      </state_interface>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+    <joint name="wrist_2_joint">
+      <command_interface name="position"/>
+      <command_interface name="velocity"/>
+      <state_interface name="position">
+        <!-- initial position for the FakeSystem and simulation -->
+        <param name="initial_value">0.0</param>
+      </state_interface>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+    <joint name="wrist_3_joint">
+      <command_interface name="position"/>
+      <command_interface name="velocity"/>
+      <state_interface name="position">
+        <!-- initial position for the FakeSystem and simulation -->
+        <param name="initial_value">0.0</param>
+      </state_interface>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+    <sensor name="tcp_fts_sensor">
+      <state_interface name="force.x"/>
+      <state_interface name="force.y"/>
+      <state_interface name="force.z"/>
+      <state_interface name="torque.x"/>
+      <state_interface name="torque.y"/>
+      <state_interface name="torque.z"/>
+    </sensor>
+    <sensor name="tcp_pose">
+      <state_interface name="position.x"/>
+      <state_interface name="position.y"/>
+      <state_interface name="position.z"/>
+      <state_interface name="orientation.x"/>
+      <state_interface name="orientation.y"/>
+      <state_interface name="orientation.z"/>
+      <state_interface name="orientation.w"/>
+    </sensor>
+    <!-- NOTE The following are joints used only for testing with fake hardware and will change in the future -->
+    <gpio name="speed_scaling">
+      <state_interface name="speed_scaling_factor"/>
+      <param name="initial_speed_scaling_factor">1</param>
+      <command_interface name="target_speed_fraction_cmd"/>
+      <command_interface name="target_speed_fraction_async_success"/>
+    </gpio>
+    <gpio name="gpio">
+      <command_interface name="standard_digital_output_cmd_0"/>
+      <command_interface name="standard_digital_output_cmd_1"/>
+      <command_interface name="standard_digital_output_cmd_2"/>
+      <command_interface name="standard_digital_output_cmd_3"/>
+      <command_interface name="standard_digital_output_cmd_4"/>
+      <command_interface name="standard_digital_output_cmd_5"/>
+      <command_interface name="standard_digital_output_cmd_6"/>
+      <command_interface name="standard_digital_output_cmd_7"/>
+      <command_interface name="standard_digital_output_cmd_8"/>
+      <command_interface name="standard_digital_output_cmd_9"/>
+      <command_interface name="standard_digital_output_cmd_10"/>
+      <command_interface name="standard_digital_output_cmd_11"/>
+      <command_interface name="standard_digital_output_cmd_12"/>
+      <command_interface name="standard_digital_output_cmd_13"/>
+      <command_interface name="standard_digital_output_cmd_14"/>
+      <command_interface name="standard_digital_output_cmd_15"/>
+      <command_interface name="standard_digital_output_cmd_16"/>
+      <command_interface name="standard_digital_output_cmd_17"/>
+      <command_interface name="standard_analog_output_cmd_0"/>
+      <command_interface name="standard_analog_output_cmd_1"/>
+      <command_interface name="analog_output_domain_cmd"/>
+      <command_interface name="tool_voltage_cmd"/>
+      <command_interface name="io_async_success"/>
+      <state_interface name="digital_output_0"/>
+      <state_interface name="digital_output_1"/>
+      <state_interface name="digital_output_2"/>
+      <state_interface name="digital_output_3"/>
+      <state_interface name="digital_output_4"/>
+      <state_interface name="digital_output_5"/>
+      <state_interface name="digital_output_6"/>
+      <state_interface name="digital_output_7"/>
+      <state_interface name="digital_output_8"/>
+      <state_interface name="digital_output_9"/>
+      <state_interface name="digital_output_10"/>
+      <state_interface name="digital_output_11"/>
+      <state_interface name="digital_output_12"/>
+      <state_interface name="digital_output_13"/>
+      <state_interface name="digital_output_14"/>
+      <state_interface name="digital_output_15"/>
+      <state_interface name="digital_output_16"/>
+      <state_interface name="digital_output_17"/>
+      <state_interface name="digital_input_0"/>
+      <state_interface name="digital_input_1"/>
+      <state_interface name="digital_input_2"/>
+      <state_interface name="digital_input_3"/>
+      <state_interface name="digital_input_4"/>
+      <state_interface name="digital_input_5"/>
+      <state_interface name="digital_input_6"/>
+      <state_interface name="digital_input_7"/>
+      <state_interface name="digital_input_8"/>
+      <state_interface name="digital_input_9"/>
+      <state_interface name="digital_input_10"/>
+      <state_interface name="digital_input_11"/>
+      <state_interface name="digital_input_12"/>
+      <state_interface name="digital_input_13"/>
+      <state_interface name="digital_input_14"/>
+      <state_interface name="digital_input_15"/>
+      <state_interface name="digital_input_16"/>
+      <state_interface name="digital_input_17"/>
+      <state_interface name="standard_analog_output_0"/>
+      <state_interface name="standard_analog_output_1"/>
+      <state_interface name="standard_analog_input_0"/>
+      <state_interface name="standard_analog_input_1"/>
+      <state_interface name="analog_io_type_0"/>
+      <state_interface name="analog_io_type_1"/>
+      <state_interface name="analog_io_type_2"/>
+      <state_interface name="analog_io_type_3"/>
+      <state_interface name="tool_mode"/>
+      <state_interface name="tool_output_voltage"/>
+      <state_interface name="tool_output_current"/>
+      <state_interface name="tool_temperature"/>
+      <state_interface name="tool_analog_input_0"/>
+      <state_interface name="tool_analog_input_1"/>
+      <state_interface name="tool_analog_input_type_0"/>
+      <state_interface name="tool_analog_input_type_1"/>
+      <state_interface name="robot_mode"/>
+      <state_interface name="robot_status_bit_0"/>
+      <state_interface name="robot_status_bit_1"/>
+      <state_interface name="robot_status_bit_2"/>
+      <state_interface name="robot_status_bit_3"/>
+      <state_interface name="safety_mode"/>
+      <state_interface name="safety_status_bit_0"/>
+      <state_interface name="safety_status_bit_1"/>
+      <state_interface name="safety_status_bit_2"/>
+      <state_interface name="safety_status_bit_3"/>
+      <state_interface name="safety_status_bit_4"/>
+      <state_interface name="safety_status_bit_5"/>
+      <state_interface name="safety_status_bit_6"/>
+      <state_interface name="safety_status_bit_7"/>
+      <state_interface name="safety_status_bit_8"/>
+      <state_interface name="safety_status_bit_9"/>
+      <state_interface name="safety_status_bit_10"/>
+      <state_interface name="program_running"/>
+    </gpio>
+    <gpio name="payload">
+      <command_interface name="mass"/>
+      <command_interface name="cog.x"/>
+      <command_interface name="cog.y"/>
+      <command_interface name="cog.z"/>
+      <command_interface name="payload_async_success"/>
+    </gpio>
+    <gpio name="resend_robot_program">
+      <command_interface name="resend_robot_program_cmd"/>
+      <command_interface name="resend_robot_program_async_success"/>
+    </gpio>
+    <gpio name="hand_back_control">
+      <command_interface name="hand_back_control_cmd"/>
+      <command_interface name="hand_back_control_async_success"/>
+    </gpio>
+    <gpio name="zero_ftsensor">
+      <command_interface name="zero_ftsensor_cmd"/>
+      <command_interface name="zero_ftsensor_async_success"/>
+    </gpio>
+    <gpio name="freedrive_mode">
+      <command_interface name="async_success"/>
+      <command_interface name="enable"/>
+      <command_interface name="abort"/>
+    </gpio>
+    <gpio name="system_interface">
+      <state_interface name="initialized"/>
+    </gpio>
+    <gpio name="force_mode">
+      <command_interface name="task_frame_x"/>
+      <command_interface name="task_frame_y"/>
+      <command_interface name="task_frame_z"/>
+      <command_interface name="task_frame_rx"/>
+      <command_interface name="task_frame_ry"/>
+      <command_interface name="task_frame_rz"/>
+      <command_interface name="selection_vector_x"/>
+      <command_interface name="selection_vector_y"/>
+      <command_interface name="selection_vector_z"/>
+      <command_interface name="selection_vector_rx"/>
+      <command_interface name="selection_vector_ry"/>
+      <command_interface name="selection_vector_rz"/>
+      <command_interface name="wrench_x"/>
+      <command_interface name="wrench_y"/>
+      <command_interface name="wrench_z"/>
+      <command_interface name="wrench_rx"/>
+      <command_interface name="wrench_ry"/>
+      <command_interface name="wrench_rz"/>
+      <command_interface name="limits_x"/>
+      <command_interface name="limits_y"/>
+      <command_interface name="limits_z"/>
+      <command_interface name="limits_rx"/>
+      <command_interface name="limits_ry"/>
+      <command_interface name="limits_rz"/>
+      <command_interface name="type"/>
+      <command_interface name="damping"/>
+      <command_interface name="gain_scaling"/>
+      <command_interface name="disable_cmd"/>
+      <command_interface name="force_mode_async_success"/>
+    </gpio>
+    <gpio name="trajectory_passthrough">
+      <command_interface name="setpoint_positions_0"/>
+      <command_interface name="setpoint_positions_1"/>
+      <command_interface name="setpoint_positions_2"/>
+      <command_interface name="setpoint_positions_3"/>
+      <command_interface name="setpoint_positions_4"/>
+      <command_interface name="setpoint_positions_5"/>
+      <command_interface name="setpoint_velocities_0"/>
+      <command_interface name="setpoint_velocities_1"/>
+      <command_interface name="setpoint_velocities_2"/>
+      <command_interface name="setpoint_velocities_3"/>
+      <command_interface name="setpoint_velocities_4"/>
+      <command_interface name="setpoint_velocities_5"/>
+      <command_interface name="setpoint_accelerations_0"/>
+      <command_interface name="setpoint_accelerations_1"/>
+      <command_interface name="setpoint_accelerations_2"/>
+      <command_interface name="setpoint_accelerations_3"/>
+      <command_interface name="setpoint_accelerations_4"/>
+      <command_interface name="setpoint_accelerations_5"/>
+      <command_interface name="transfer_state"/>
+      <command_interface name="time_from_start"/>
+      <command_interface name="abort"/>
+    </gpio>
+    <gpio name="get_robot_software_version">
+      <state_interface name="get_version_major"/>
+      <state_interface name="get_version_minor"/>
+      <state_interface name="get_version_build"/>
+      <state_interface name="get_version_bugfix"/>
+    </gpio>
+  </ros2_control>
+
+  <!-- Add URDF transmission elements (for ros_control) -->
+  <!--<xacro:ur_arm_transmission prefix="${prefix}" hw_interface="${transmission_hw_interface}" />-->
+  <!-- Placeholder for ros2_control transmission which don't yet exist -->
+
+  <!-- links -  main serial chain -->
+  <link name="arm_base_link"/>
+  <link name="base_link_inertia">
+    <visual>
+      <origin rpy="0 0 3.141592653589793" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="/home/sim-system/sim_ws/src/10xSim/version_system/config/current/meshes/ur10e/visual/base.dae"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0 0 3.141592653589793" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="/home/sim-system/sim_ws/src/10xSim/version_system/config/current/meshes/ur10e/collision/base.stl"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="4.0"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0.0061063308908" ixy="0.0" ixz="0.0" iyy="0.0061063308908" iyz="0.0" izz="0.01125"/>
+    </inertial>
+  </link>
+  <link name="shoulder_link">
+    <visual>
+      <origin rpy="0 0 3.141592653589793" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="/home/sim-system/sim_ws/src/10xSim/version_system/config/current/meshes/ur10e/visual/shoulder.dae"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0 0 3.141592653589793" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="/home/sim-system/sim_ws/src/10xSim/version_system/config/current/meshes/ur10e/collision/shoulder.stl"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="7.369"/>
+      <origin rpy="1.570796326794897 0 0" xyz="0.021 -0.027 0.0"/>
+      <inertia ixx="0.03408" ixy="2e-05" ixz="-0.00425" iyy="0.03529" iyz="8e-05" izz="0.02156"/>
+    </inertial>
+  </link>
+  <link name="upper_arm_link">
+    <visual>
+      <origin rpy="1.5707963267948966 0 -1.5707963267948966" xyz="0 0 0.1762"/>
+      <geometry>
+        <mesh filename="/home/sim-system/sim_ws/src/10xSim/version_system/config/current/meshes/ur10e/visual/upperarm.dae"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="1.5707963267948966 0 -1.5707963267948966" xyz="0 0 0.1762"/>
+      <geometry>
+        <mesh filename="/home/sim-system/sim_ws/src/10xSim/version_system/config/current/meshes/ur10e/collision/upperarm.stl"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="13.051"/>
+      <origin rpy="0 0 0" xyz="-0.2327 0.0 0.158"/>
+      <inertia ixx="0.02814" ixy="5e-05" ixz="-0.01561" iyy="0.77068" iyz="2e-05" izz="0.76943"/>
+    </inertial>
+  </link>
+  <link name="upperarm_clip">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="/home/sim-system/sim_ws/src/10xSim/version_system/config/current/meshes/ur10e/visual/upperarm_clip_visual.stl"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="/home/sim-system/sim_ws/src/10xSim/version_system/config/current/meshes/ur10e/collision/upperarm_clip_collision.stl"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="1e-9"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="upper_arm_link-upperarm_clip" type="fixed">
+    <parent link="upper_arm_link"/>
+    <child link="upperarm_clip"/>
+    <origin rpy="0 0.0 -1.5707963267948966" xyz="-0.35 0 0.18"/>
+  </joint>
+  <link name="forearm_link">
+    <visual>
+      <origin rpy="1.5707963267948966 0 -1.5707963267948966" xyz="0 0 0.0393"/>
+      <geometry>
+        <mesh filename="/home/sim-system/sim_ws/src/10xSim/version_system/config/current/meshes/ur10e/visual/forearm.dae"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="1.5707963267948966 0 -1.5707963267948966" xyz="0 0 0.0393"/>
+      <geometry>
+        <mesh filename="/home/sim-system/sim_ws/src/10xSim/version_system/config/current/meshes/ur10e/collision/forearm.stl"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="3.989"/>
+      <origin rpy="0 0 0" xyz="-0.33155 0.0 0.068"/>
+      <inertia ixx="0.01014" ixy="8e-05" ixz="0.00916" iyy="0.30928" iyz="0.0" izz="0.30646"/>
+    </inertial>
+  </link>
+  <link name="forearm_clip_1">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="/home/sim-system/sim_ws/src/10xSim/version_system/config/current/meshes/ur10e/visual/forearm_clip_visual.stl"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="/home/sim-system/sim_ws/src/10xSim/version_system/config/current/meshes/ur10e/collision/forearm_clip_collision.stl"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="1e-9"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="forearm_link-forearm_clip_1" type="fixed">
+    <parent link="forearm_link"/>
+    <child link="forearm_clip_1"/>
+    <origin rpy="0 3.14 -1.5707963267948966" xyz="-0.4 0 0.04"/>
+  </joint>
+  <link name="forearm_clip_2">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="/home/sim-system/sim_ws/src/10xSim/version_system/config/current/meshes/ur10e/visual/forearm_clip_visual.stl"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="/home/sim-system/sim_ws/src/10xSim/version_system/config/current/meshes/ur10e/collision/forearm_clip_collision.stl"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="1e-9"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="forearm_link-forearm_clip_2" type="fixed">
+    <parent link="forearm_link"/>
+    <child link="forearm_clip_2"/>
+    <origin rpy="0 3.14 -1.5707963267948966" xyz="-0.17 0 0.04"/>
+  </joint>
+  <link name="wrist_1_link">
+    <visual>
+      <origin rpy="1.5707963267948966 0 0" xyz="0 0 -0.135"/>
+      <geometry>
+        <mesh filename="/home/sim-system/sim_ws/src/10xSim/version_system/config/current/meshes/ur10e/visual/wrist1.dae"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="1.5707963267948966 0 0" xyz="0 0 -0.135"/>
+      <geometry>
+        <mesh filename="/home/sim-system/sim_ws/src/10xSim/version_system/config/current/meshes/ur10e/collision/wrist1.stl"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="2.1"/>
+      <origin rpy="1.570796326794897 0 0" xyz="0.0 -0.018 0.007"/>
+      <inertia ixx="0.00296" ixy="-1e-05" ixz="0.0" iyy="0.00222" iyz="-0.00024" izz="0.00258"/>
+    </inertial>
+  </link>
+  <link name="wrist_2_link">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 -0.12"/>
+      <geometry>
+        <mesh filename="/home/sim-system/sim_ws/src/10xSim/version_system/config/current/meshes/ur10e/visual/wrist2.dae"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 -0.12"/>
+      <geometry>
+        <mesh filename="/home/sim-system/sim_ws/src/10xSim/version_system/config/current/meshes/ur10e/collision/wrist2.stl"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="1.98"/>
+      <origin rpy="-1.570796326794897 0 0" xyz="0.0 0.018 -0.007"/>
+      <inertia ixx="0.00296" ixy="-1e-05" ixz="0.0" iyy="0.00222" iyz="-0.00024" izz="0.00258"/>
+    </inertial>
+  </link>
+  <link name="wrist_3_link">
+    <visual>
+      <origin rpy="1.5707963267948966 0 0" xyz="0 0 -0.1168"/>
+      <geometry>
+        <mesh filename="/home/sim-system/sim_ws/src/10xSim/version_system/config/current/meshes/ur10e/visual/wrist3.dae"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="1.5707963267948966 0 0" xyz="0 0 -0.1168"/>
+      <geometry>
+        <mesh filename="/home/sim-system/sim_ws/src/10xSim/version_system/config/current/meshes/ur10e/collision/wrist3.stl"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.615"/>
+      <origin rpy="0 0 0" xyz="0.0 0.0 -0.026"/>
+      <inertia ixx="0.0004" ixy="0.0" ixz="0.0" iyy="0.00041" iyz="0.0" izz="0.00034"/>
+    </inertial>
+  </link>
+
+  <!-- base_joint fixes base_link to the environment -->
+
+  <!-- joints - main serial chain -->
+  <joint name="base_link-base_link_inertia" type="fixed">
+    <parent link="arm_base_link"/>
+    <child link="base_link_inertia"/>
+    <!-- 'base_link' is REP-103 aligned (so X+ forward), while the internal
+         frames of the robot/controller have X+ pointing backwards.
+         Use the joint between 'base_link' and 'base_link_inertia' (a dummy
+         link/frame) to introduce the necessary rotation over Z (of pi rad).
+    -->
+    <origin rpy="0 0 3.141592653589793" xyz="0 0 0"/>
+  </joint>
+  <joint name="shoulder_pan_joint" type="revolute">
+    <parent link="base_link_inertia"/>
+    <child link="shoulder_link"/>
+    <origin rpy="0 0 -8.75366608928986e-07" xyz="0 0 0.18062964008994117"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="330.0" lower="-6.283185307179586" upper="6.283185307179586" velocity="2.0943951023931953"/>
+    <safety_controller k_position="20" k_velocity="0.0" soft_lower_limit="-6.133185307179586" soft_upper_limit="6.133185307179586"/>
+    <dynamics damping="0" friction="0"/>
+  </joint>
+  <joint name="shoulder_lift_joint" type="revolute">
+    <parent link="shoulder_link"/>
+    <child link="upper_arm_link"/>
+    <origin rpy="1.5702384056221088 0 5.7477024635550626e-06" xyz="4.866790428832224e-05 0 0"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="330.0" lower="-6.283185307179586" upper="6.283185307179586" velocity="2.0943951023931953"/>
+    <safety_controller k_position="20" k_velocity="0.0" soft_lower_limit="-6.133185307179586" soft_upper_limit="6.133185307179586"/>
+    <dynamics damping="0" friction="0"/>
+  </joint>
+  <joint name="elbow_joint" type="revolute">
+    <parent link="upper_arm_link"/>
+    <child link="forearm_link"/>
+    <origin rpy="3.139139688661941 3.1408105564946913 3.1415918557986973" xyz="-0.61225028085369 0 0"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="150.0" lower="-3.141592653589793" upper="3.141592653589793" velocity="3.141592653589793"/>
+    <safety_controller k_position="20" k_velocity="0.0" soft_lower_limit="-2.991592653589793" soft_upper_limit="2.991592653589793"/>
+    <dynamics damping="0" friction="0"/>
+  </joint>
+  <joint name="wrist_1_joint" type="revolute">
+    <parent link="forearm_link"/>
+    <child link="wrist_1_link"/>
+    <origin rpy="0.006036750410556242 -0.0004775714245164703 1.938927842175405e-06" xyz="-0.5712757784557655 -0.0010508397187543217 0.17407162500223494"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="54.0" lower="-6.283185307179586" upper="6.283185307179586" velocity="3.141592653589793"/>
+    <safety_controller k_position="20" k_velocity="0.0" soft_lower_limit="-6.133185307179586" soft_upper_limit="6.133185307179586"/>
+    <dynamics damping="0" friction="0"/>
+  </joint>
+  <joint name="wrist_2_joint" type="revolute">
+    <parent link="wrist_1_link"/>
+    <child link="wrist_2_link"/>
+    <origin rpy="1.569344857637184 0 4.883610374636915e-07" xyz="-6.481010039503579e-05 -0.11982164738214854 0.00017391754773585667"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="54.0" lower="-6.283185307179586" upper="6.283185307179586" velocity="3.141592653589793"/>
+    <safety_controller k_position="20" k_velocity="0.0" soft_lower_limit="-6.133185307179586" soft_upper_limit="6.133185307179586"/>
+    <dynamics damping="0" friction="0"/>
+  </joint>
+  <joint name="wrist_3_joint" type="revolute">
+    <parent link="wrist_2_link"/>
+    <child link="wrist_3_link"/>
+    <origin rpy="1.5712722650192064 3.141592653589793 3.1415926067641338" xyz="-1.6432406471310435e-05 0.11556181595533264 5.500028963664138e-05"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="54.0" lower="-6.283185307179586" upper="6.283185307179586" velocity="3.141592653589793"/>
+    <safety_controller k_position="20" k_velocity="0.0" soft_lower_limit="-6.133185307179586" soft_upper_limit="6.133185307179586"/>
+    <dynamics damping="0" friction="0"/>
+  </joint>
+  <link name="ft_frame"/>
+  <joint name="wrist_3_link-ft_frame" type="fixed">
+    <parent link="wrist_3_link"/>
+    <child link="ft_frame"/>
+    <origin rpy="3.141592653589793 0 0" xyz="0 0 0"/>
+  </joint>
+  <!-- ROS-Industrial 'base' frame - base_link to UR 'Base' Coordinates transform -->
+  <link name="base"/>
+  <joint name="base_link-base_fixed_joint" type="fixed">
+    <!-- Note the rotation over Z of pi radians - as base_link is REP-103
+         aligned (i.e., has X+ forward, Y+ left and Z+ up), this is needed
+         to correctly align 'base' with the 'Base' coordinate system of
+         the UR controller.
+    -->
+    <origin rpy="0 0 3.141592653589793" xyz="0 0 0"/>
+    <parent link="arm_base_link"/>
+    <child link="base"/>
+  </joint>
+  <!-- ROS-Industrial 'flange' frame - attachment point for EEF models -->
+  <link name="flange"/>
+  <joint name="wrist_3-flange" type="fixed">
+    <parent link="wrist_3_link"/>
+    <child link="flange"/>
+    <origin rpy="0 -1.5707963267948966 -1.5707963267948966" xyz="0 0 0"/>
+  </joint>
+  <!-- Sprayer tool model -->
+  <link name="tool_mount">
+    <inertial>
+      <origin rpy="0 0 0" xyz="-0.00329394 0.00744512 0.116191"/>
+      <mass value="3.2878"/>
+      <inertia ixx="0.0144005" ixy="0.00121884" ixz="0.000179023" iyy="0.0131968" iyz="-0.000624796" izz="0.00508266"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="-0.00329394 0.00744512 0.116191"/>
+      <geometry>
+        <mesh filename="/home/sim-system/sim_ws/src/10xSim/version_system/config/current/meshes/tool_sprayer/tool_sprayer_visual.stl"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="-0.00329394 0.00744512 0.116191"/>
+      <geometry>
+        <mesh filename="/home/sim-system/sim_ws/src/10xSim/version_system/config/current/meshes/tool_sprayer/tool_sprayer_collision.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Flange mount dummy link between UR flange and the sprayer tool -->
+  <link name="flange_mount">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="flange-flange_mount" type="fixed">
+    <origin rpy="0 1.5707963267948966 0" xyz="0 0 0"/>
+    <parent link="flange"/>
+    <child link="flange_mount"/>
+  </joint>
+  <joint name="flange_mount-tool_mount" type="fixed">
+    <origin rpy="0 0 -1.5707963267948966" xyz="0 0 0"/>
+    <parent link="flange_mount"/>
+    <child link="tool_mount"/>
+  </joint>
+  <!-- ROS-Industrial 'tool0' frame - all-zeros tool frame at sprayer TCP -->
+  <link name="tool0"/>
+  <joint name="tool0_mount" type="fixed">
+    <origin rpy="0 0 3.141592653589793" xyz="0 0 0.225"/>
+    <parent link="tool_mount"/>
+    <child link="tool0"/>
+  </joint>
+</robot>

@@ -1,0 +1,363 @@
+arm_mount_frame:
+  gains:
+    damping: null
+    maxForce: null
+    maxVelocity: null
+    stiffness: null
+  info:
+    type: fixed
+  links:
+    child_link: arm_mount
+    parent_link: liftkit_top
+arm_tool_joint:
+  gains:
+    damping: null
+    maxForce: null
+    maxVelocity: null
+    stiffness: null
+  info:
+    type: fixed
+  links:
+    child_link: eoa_vision_module_detailed_assembly
+    parent_link: tool0
+base_link-base_fixed_joint:
+  gains:
+    damping: null
+    maxForce: null
+    maxVelocity: null
+    stiffness: null
+  info:
+    type: fixed
+  links:
+    child_link: base
+    parent_link: arm_base_link
+base_link-base_link_inertia:
+  gains:
+    damping: null
+    maxForce: null
+    maxVelocity: null
+    stiffness: null
+  info:
+    type: fixed
+  links:
+    child_link: base_link_inertia
+    parent_link: arm_base_link
+chassis_arm_base_joint:
+  gains:
+    damping: null
+    maxForce: null
+    maxVelocity: null
+    stiffness: null
+  info:
+    type: fixed
+  links:
+    child_link: arm_base_link
+    parent_link: arm_mount
+elbow_joint:
+  gains:
+    damping: 2000
+    maxForce: 19800
+    maxVelocity: 300
+    stiffness: 20000
+  info:
+    type: revolute
+  links:
+    child_link: forearm_link
+    parent_link: upper_arm_link
+fisheye_mount_frame:
+  gains:
+    damping: null
+    maxForce: null
+    maxVelocity: null
+    stiffness: null
+  info:
+    type: fixed
+  links:
+    child_link: fisheye_mount
+    parent_link: liftkit_top
+fisheye_optical_frame:
+  gains:
+    damping: null
+    maxForce: null
+    maxVelocity: null
+    stiffness: null
+  info:
+    type: fixed
+  links:
+    child_link: fisheye_optical
+    parent_link: liftkit_top
+flange-tool0:
+  gains:
+    damping: null
+    maxForce: null
+    maxVelocity: null
+    stiffness: null
+  info:
+    type: fixed
+  links:
+    child_link: tool0
+    parent_link: flange
+lidar_imu_frame:
+  gains:
+    damping: null
+    maxForce: null
+    maxVelocity: null
+    stiffness: null
+  info:
+    type: fixed
+  links:
+    child_link: livox_amr_imu_mount
+    parent_link: base_link
+lidar_mani_frame:
+  gains:
+    damping: null
+    maxForce: null
+    maxVelocity: null
+    stiffness: null
+  info:
+    type: fixed
+  links:
+    child_link: lidar_mani
+    parent_link: liftkit_top
+lidar_nav_mount_frame:
+  gains:
+    damping: null
+    maxForce: null
+    maxVelocity: null
+    stiffness: null
+  info:
+    type: fixed
+  links:
+    child_link: lidar_nav_mount
+    parent_link: base_link
+lidarfl_mount_frame:
+  gains:
+    damping: null
+    maxForce: null
+    maxVelocity: null
+    stiffness: null
+  info:
+    type: fixed
+  links:
+    child_link: lidarfl_mount
+    parent_link: base_link
+lidarfr_mount_frame:
+  gains:
+    damping: null
+    maxForce: null
+    maxVelocity: null
+    stiffness: null
+  info:
+    type: fixed
+  links:
+    child_link: lidarfr_mount
+    parent_link: base_link
+lidarrl_mount_frame:
+  gains:
+    damping: null
+    maxForce: null
+    maxVelocity: null
+    stiffness: null
+  info:
+    type: fixed
+  links:
+    child_link: lidarrl_mount
+    parent_link: base_link
+lidarrr_mount_frame:
+  gains:
+    damping: null
+    maxForce: null
+    maxVelocity: null
+    stiffness: null
+  info:
+    type: fixed
+  links:
+    child_link: lidarrr_mount
+    parent_link: base_link
+liftkit_mid:
+  gains:
+    damping: 45000.0
+    maxForce: 70000.0
+    maxVelocity: 0.012
+    stiffness: 8000000.0
+  info:
+    type: prismatic
+  links:
+    child_link: liftkit_mid
+    parent_link: base_link
+liftkit_top:
+  gains:
+    damping: 0.0
+    maxForce: 0.0
+    maxVelocity: 0.0
+    stiffness: 0.0
+  info:
+    type: prismatic
+  links:
+    child_link: liftkit_top
+    parent_link: liftkit_mid
+shoulder_lift_joint:
+  gains:
+    damping: 2000
+    maxForce: 19800
+    maxVelocity: 300
+    stiffness: 20000
+  info:
+    type: revolute
+  links:
+    child_link: upper_arm_link
+    parent_link: shoulder_link
+shoulder_pan_joint:
+  gains:
+    damping: 2000
+    maxForce: 19800
+    maxVelocity: 300
+    stiffness: 20000
+  info:
+    type: revolute
+  links:
+    child_link: shoulder_link
+    parent_link: base_link_inertia
+shutter_fisheye:
+  gains:
+    damping: 100
+    maxForce: null
+    maxVelocity: null
+    stiffness: 10000
+  info:
+    type: revolute
+  links:
+    child_link: shutter_fisheye
+    parent_link: liftkit_top
+shutter_lidarmani:
+  gains:
+    damping: 100
+    maxForce: null
+    maxVelocity: null
+    stiffness: 10000
+  info:
+    type: revolute
+  links:
+    child_link: shutter_lidarmani
+    parent_link: liftkit_top
+steering_f:
+  gains:
+    damping: 100
+    maxForce: 0.5
+    maxVelocity: 120.0
+    stiffness: 1000
+  info:
+    type: revolute
+  links:
+    child_link: steering_3
+    parent_link: base_link
+steering_rl:
+  gains:
+    damping: 100
+    maxForce: 0.5
+    maxVelocity: 120.0
+    stiffness: 1000
+  info:
+    type: revolute
+  links:
+    child_link: steering_2
+    parent_link: base_link
+steering_rr:
+  gains:
+    damping: 100
+    maxForce: 0.5
+    maxVelocity: 120.0
+    stiffness: 1000
+  info:
+    type: revolute
+  links:
+    child_link: steering
+    parent_link: base_link
+wheel_f:
+  gains:
+    damping: 20000.0
+    maxForce: 2.0
+    maxVelocity: 100.0
+    stiffness: 300.0
+  info:
+    type: continuous
+  links:
+    child_link: wheel_3
+    parent_link: steering_3
+wheel_rl:
+  gains:
+    damping: 20000.0
+    maxForce: 2.0
+    maxVelocity: 100.0
+    stiffness: 300.0
+  info:
+    type: continuous
+  links:
+    child_link: wheel_2
+    parent_link: steering_2
+wheel_rr:
+  gains:
+    damping: 20000.0
+    maxForce: 2.0
+    maxVelocity: 100.0
+    stiffness: 300.0
+  info:
+    type: continuous
+  links:
+    child_link: wheel
+    parent_link: steering
+wrist_1_joint:
+  gains:
+    damping: 2000
+    maxForce: 19800
+    maxVelocity: 300
+    stiffness: 20000
+  info:
+    type: revolute
+  links:
+    child_link: wrist_1_link
+    parent_link: forearm_link
+wrist_2_joint:
+  gains:
+    damping: 2000
+    maxForce: 19800
+    maxVelocity: 300
+    stiffness: 20000
+  info:
+    type: revolute
+  links:
+    child_link: wrist_2_link
+    parent_link: wrist_1_link
+wrist_3-flange:
+  gains:
+    damping: null
+    maxForce: null
+    maxVelocity: null
+    stiffness: null
+  info:
+    type: fixed
+  links:
+    child_link: flange
+    parent_link: wrist_3_link
+wrist_3_joint:
+  gains:
+    damping: 2000
+    maxForce: 19800
+    maxVelocity: 300
+    stiffness: 20000
+  info:
+    type: revolute
+  links:
+    child_link: wrist_3_link
+    parent_link: wrist_2_link
+wrist_3_link-ft_frame:
+  gains:
+    damping: null
+    maxForce: null
+    maxVelocity: null
+    stiffness: null
+  info:
+    type: fixed
+  links:
+    child_link: ft_frame
+    parent_link: wrist_3_link

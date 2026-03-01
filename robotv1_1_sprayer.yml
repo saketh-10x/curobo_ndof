@@ -1,0 +1,96 @@
+robot_cfg:
+  kinematics:
+    urdf_path: "full_robot_resolved.urdf"
+    base_link: "swerve_link_x"
+    ee_link: "tool0"
+
+    # Lock non-cspace movable joints (required when collision checking is enabled,
+    # since cuRobo processes all non-fixed URDF joints with collision spheres)
+    lock_joints:
+      steering_f: 0.0
+      steering_rl: 0.0
+      steering_rr: 0.0
+      wheel_f: 0.0
+      wheel_rl: 0.0
+      wheel_rr: 0.0
+
+    # Collision link names — all links with collision spheres
+    # (from 10xSim/version_system/config/v1/v1.1.1/xrdf/tool_sander/full_robot.xrdf)
+    collision_link_names: [
+      "base_link", "liftkit_mid", "liftkit_top", "base_link_inertia",
+      "shoulder_link", "upper_arm_link", "forearm_link",
+      "forearm_clip_1", "forearm_clip_2",
+      "wrist_1_link", "wrist_2_link", "wrist_3_link",
+      "tool_mount", "upperarm_clip",
+      "steering", "steering_2", "steering_3",
+      "wheel", "wheel_2", "wheel_3"
+    ]
+    collision_spheres: "robotv1_1_spheres.yml"  # overridden to absolute path at runtime
+    collision_sphere_buffer: 0.0
+    self_collision_ignore: {
+      "base_link": ["liftkit_mid", "liftkit_top", "base_link_inertia", "steering", "steering_2", "steering_3", "wheel", "wheel_2", "wheel_3", "arm_mount"],
+      "liftkit_mid": ["base_link", "liftkit_top", "base_link_inertia", "shoulder_link", "upper_arm_link", "forearm_link", "wrist_1_link", "wrist_2_link", "wrist_3_link", "tool_mount", "steering_3", "steering_2", "steering", "forearm_clip_1", "forearm_clip_2", "wheel", "wheel_2", "wheel_3", "upperarm_clip"],
+      "liftkit_top": ["liftkit_mid", "base_link", "base_link_inertia", "shoulder_link", "forearm_link", "wrist_1_link", "wrist_2_link", "wrist_3_link", "tool_mount", "steering_3", "steering_2", "steering", "forearm_clip_1", "forearm_clip_2", "wheel", "wheel_2", "wheel_3"],
+      "base_link_inertia": ["liftkit_mid", "liftkit_top", "base_link", "shoulder_link", "upper_arm_link", "forearm_link", "wrist_1_link", "wrist_2_link", "wrist_3_link", "tool_mount", "steering_3", "steering_2", "steering", "forearm_clip_1", "forearm_clip_2", "wheel", "wheel_2", "wheel_3", "upperarm_clip"],
+      "shoulder_link": ["liftkit_mid", "liftkit_top", "base_link_inertia", "upper_arm_link", "wrist_1_link", "wrist_2_link", "wrist_3_link", "tool_mount", "steering_3", "steering_2", "steering", "forearm_clip_1", "forearm_clip_2", "wheel", "wheel_2", "wheel_3", "upperarm_clip"],
+      "forearm_link": ["liftkit_mid", "liftkit_top", "base_link_inertia", "upper_arm_link", "wrist_1_link", "wrist_2_link", "steering_3", "steering_2", "steering", "forearm_clip_1", "forearm_clip_2", "wheel", "wheel_2", "wheel_3", "upperarm_clip"],
+      "wrist_1_link": ["liftkit_mid", "liftkit_top", "base_link_inertia", "shoulder_link", "forearm_link", "wrist_2_link", "wrist_3_link", "tool_mount", "steering_3", "steering_2", "steering", "forearm_clip_1", "forearm_clip_2", "wheel", "wheel_2", "wheel_3", "upperarm_clip"],
+      "wrist_2_link": ["liftkit_mid", "liftkit_top", "base_link_inertia", "shoulder_link", "upper_arm_link", "forearm_link", "wrist_1_link", "wrist_3_link", "tool_mount", "steering_3", "steering_2", "steering", "forearm_clip_1", "forearm_clip_2", "wheel", "wheel_2", "wheel_3", "upperarm_clip"],
+      "wrist_3_link": ["liftkit_mid", "liftkit_top", "base_link_inertia", "shoulder_link", "upper_arm_link", "wrist_1_link", "wrist_2_link", "tool_mount", "steering_3", "steering_2", "steering", "forearm_clip_1", "forearm_clip_2", "wheel", "wheel_2", "wheel_3", "upperarm_clip"],
+      "tool_mount": ["liftkit_mid", "liftkit_top", "base_link_inertia", "shoulder_link", "upper_arm_link", "wrist_1_link", "wrist_2_link", "wrist_3_link", "steering_3", "steering_2", "steering", "forearm_clip_2", "wheel", "wheel_2", "wheel_3", "upperarm_clip"],
+      "steering_3": ["liftkit_mid", "liftkit_top", "base_link_inertia", "shoulder_link", "upper_arm_link", "forearm_link", "wrist_1_link", "wrist_2_link", "wrist_3_link", "tool_mount", "base_link", "steering_2", "steering", "forearm_clip_1", "forearm_clip_2", "wheel", "wheel_2", "wheel_3", "upperarm_clip"],
+      "steering_2": ["liftkit_mid", "liftkit_top", "base_link_inertia", "shoulder_link", "upper_arm_link", "forearm_link", "wrist_1_link", "wrist_2_link", "wrist_3_link", "tool_mount", "steering_3", "base_link", "steering", "forearm_clip_1", "forearm_clip_2", "wheel", "wheel_2", "wheel_3", "upperarm_clip"],
+      "steering": ["liftkit_mid", "liftkit_top", "base_link_inertia", "shoulder_link", "upper_arm_link", "forearm_link", "wrist_1_link", "wrist_2_link", "wrist_3_link", "tool_mount", "steering_3", "steering_2", "base_link", "forearm_clip_1", "forearm_clip_2", "wheel", "wheel_2", "wheel_3", "upperarm_clip"],
+      "forearm_clip_1": ["shoulder_link", "upper_arm_link", "forearm_link", "wrist_1_link", "wrist_2_link", "wrist_3_link", "steering_3", "steering_2", "steering", "forearm_clip_2", "wheel", "wheel_2", "wheel_3", "upperarm_clip"],
+      "forearm_clip_2": ["shoulder_link", "upper_arm_link", "forearm_link", "wrist_1_link", "wrist_2_link", "wrist_3_link", "steering_3", "steering_2", "steering", "forearm_clip_1", "wheel", "wheel_2", "wheel_3", "upperarm_clip"],
+      "upperarm_clip": ["liftkit_mid", "base_link_inertia", "shoulder_link", "upper_arm_link", "forearm_link", "wrist_1_link", "wrist_2_link", "wrist_3_link", "tool_mount", "steering_3", "steering_2", "steering", "forearm_clip_1", "wheel", "wheel_2", "wheel_3", "forearm_clip_2"],
+      "wheel": ["wheel_2", "wheel_3", "upperarm_clip", "liftkit_mid", "liftkit_top", "base_link_inertia", "shoulder_link", "upper_arm_link", "forearm_link", "wrist_1_link", "wrist_2_link", "wrist_3_link", "tool_mount", "steering_3", "steering_2", "steering", "forearm_clip_1", "base_link", "forearm_clip_2"],
+      "wheel_2": ["wheel", "wheel_3", "upperarm_clip", "liftkit_mid", "liftkit_top", "base_link_inertia", "shoulder_link", "upper_arm_link", "forearm_link", "wrist_1_link", "wrist_2_link", "wrist_3_link", "tool_mount", "steering_3", "steering_2", "steering", "forearm_clip_1", "base_link", "forearm_clip_2"],
+      "wheel_3": ["wheel_2", "wheel", "upperarm_clip", "liftkit_mid", "liftkit_top", "base_link_inertia", "shoulder_link", "upper_arm_link", "forearm_link", "wrist_1_link", "wrist_2_link", "wrist_3_link", "tool_mount", "steering_3", "steering_2", "steering", "forearm_clip_1", "base_link", "forearm_clip_2"],
+      "upper_arm_link": ["wheel_2", "wheel_3", "wheel", "liftkit_mid", "liftkit_top", "arm_mount", "arm_base_link", "base_link_inertia", "shoulder_link", "forearm_link", "wrist_1_link", "wrist_2_link", "wrist_3_link", "flange", "flange_mount", "tool_mount", "steering_3", "steering_2", "steering", "base_footprint", "dock_frame", "livox_amr_imu_mount", "lidar_nav_mount", "lidarfl_mount", "lidarfr_mount", "lidarrl_mount", "lidarrr_mount", "fisheye_mount", "fisheye_optical", "base", "forearm_clip_1", "forearm_clip_2"],
+    }
+    self_collision_buffer: {
+      "base_link": 0.0,
+      "liftkit_mid": 0,
+      "liftkit_top": 0,
+      "base_link_inertia": 0,
+      "shoulder_link": 0.0,
+      "upper_arm_link": 0,
+      "forearm_link": 0,
+      "forearm_clip_1": 0,
+      "forearm_clip_2": 0,
+      "wrist_1_link": 0,
+      "wrist_2_link": 0,
+      "wrist_3_link": 0,
+      "tool_mount": 0.0,
+      "upperarm_clip": 0,
+      "steering": 0,
+      "steering_2": 0,
+      "steering_3": 0,
+      "wheel": 0,
+      "wheel_2": 0,
+      "wheel_3": 0,
+    }
+
+    # 10-DOF: 3 base + 1 liftkit + 6 UR10e arm
+    # liftkit_top is a mimic of liftkit_mid (handled automatically by cuRobo)
+    cspace:
+      joint_names:
+        - "base_x"
+        - "base_y"
+        - "base_theta"
+        - "liftkit_mid"
+        - "shoulder_pan_joint"
+        - "shoulder_lift_joint"
+        - "elbow_joint"
+        - "wrist_1_joint"
+        - "wrist_2_joint"
+        - "wrist_3_joint"
+      retract_config: [0.0, 0.0, 0.0, 0.0, 0.0, -1.5708, 0.0, -1.5708, 0.0, 0.0]
+      # Joint weights: higher = more expensive to move
+      # Base joints get 5.0 (discourage unnecessary base motion)
+      # liftkit is expensive (8.0), arm joints are cheap (1.0)
+      null_space_weight: [5.0, 5.0, 5.0, 8.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+      cspace_distance_weight: [5.0, 5.0, 5.0, 8.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+      max_jerk: 500.0
+      max_acceleration: 15.0

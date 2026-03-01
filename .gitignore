@@ -1,0 +1,4 @@
+usd_generated/
+__pycache__/
+*.usd
+*.usda

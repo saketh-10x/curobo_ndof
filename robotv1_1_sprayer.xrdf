@@ -1,0 +1,890 @@
+format: "xrdf"
+
+format_version: 1.0
+
+##
+## Based on: 10xSim/version_system/config/v1/v1.1.1/xrdf/tool_sander/full_robot.xrdf
+## Extended for 10-DOF whole-body planning (3 base + 1 liftkit + 6 UR10e arm).
+##
+
+modifiers:
+  - set_base_frame: "swerve_link_x"
+
+default_joint_positions:
+  base_x: 0.0
+  base_y: 0.0
+  base_theta: 0.0
+  liftkit_mid: 0.0
+  shoulder_pan_joint: 0.0
+  shoulder_lift_joint: -1.5708
+  elbow_joint: 0.0
+  wrist_1_joint: -1.5708
+  wrist_2_joint: 0.0
+  wrist_3_joint: 0.0
+
+locked_joints:
+  shutter_fisheye: 0.0
+  shutter_lidarmani: 0.0
+
+cspace:
+  joint_names:
+    - "base_x"
+    - "base_y"
+    - "base_theta"
+    - "liftkit_mid"
+    - "shoulder_pan_joint"
+    - "shoulder_lift_joint"
+    - "elbow_joint"
+    - "wrist_1_joint"
+    - "wrist_2_joint"
+    - "wrist_3_joint"
+  acceleration_limits: [15.0, 15.0, 15.0, 15.0, 12.0, 12.0, 12.0, 12.0, 12.0, 12.0]
+  jerk_limits: [500.0, 500.0, 500.0, 500.0, 500.0, 500.0, 500.0, 500.0, 500.0, 500.0]
+  position_limits:
+    liftkit_top: [0.0, 1.4]
+  retract_config: [0.0, 0.0, 0.0, 0.0, 0.0, -1.5708, 0.0, -1.5708, 0.0, 0.0]
+  cspace_distance_weight: [5.0, 5.0, 5.0, 8.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+
+tool_frames: ["tool0"]
+
+collision:
+  geometry: "auto_generated_collision_sphere_group"
+  buffer_distance:
+    shoulder_link: 0.00
+    upper_arm_link: 0.00
+    forearm_link: 0.0
+    wrist_1_link: 0.0
+    wrist_2_link: 0.0
+    wrist_3_link: 0.0
+    tool0: 0.0
+
+self_collision:
+  geometry: "auto_generated_collision_sphere_group"
+  buffer_distance:
+    shoulder_link: 0.0
+    tool0: 0.0
+  ignore:
+    base_link:
+      - liftkit_mid
+      - liftkit_top
+      - base_link_inertia
+      - steering
+      - steering_2
+      - steering_3
+      - wheel
+      - wheel_2
+      - wheel_3
+      - arm_mount
+    liftkit_mid:
+      - "base_link"
+      - "liftkit_top"
+      - "base_link_inertia"
+      - "shoulder_link"
+      - "upper_arm_link"
+      - "forearm_link"
+      - "wrist_1_link"
+      - "wrist_2_link"
+      - "wrist_3_link"
+      - "tool_mount"
+      - "steering_3"
+      - "steering_2"
+      - "steering"
+      - "forearm_clip_1"
+      - "forearm_clip_2"
+      - "wheel"
+      - "wheel_2"
+      - "wheel_3"
+      - "upperarm_clip"
+    liftkit_top:
+      - "liftkit_mid"
+      - "base_link"
+      - "base_link_inertia"
+      - "shoulder_link"
+      - "forearm_link"
+      - "wrist_1_link"
+      - "wrist_2_link"
+      - "wrist_3_link"
+      - "tool_mount"
+      - "steering_3"
+      - "steering_2"
+      - "steering"
+      - "forearm_clip_1"
+      - "forearm_clip_2"
+      - "wheel"
+      - "wheel_2"
+      - "wheel_3"
+    base_link_inertia:
+      - "liftkit_mid"
+      - "liftkit_top"
+      - "base_link"
+      - "shoulder_link"
+      - "upper_arm_link"
+      - "forearm_link"
+      - "wrist_1_link"
+      - "wrist_2_link"
+      - "wrist_3_link"
+      - "tool_mount"
+      - "steering_3"
+      - "steering_2"
+      - "steering"
+      - "forearm_clip_1"
+      - "forearm_clip_2"
+      - "wheel"
+      - "wheel_2"
+      - "wheel_3"
+      - "upperarm_clip"
+    shoulder_link:
+      - "liftkit_mid"
+      - "liftkit_top"
+      - "base_link_inertia"
+      - "upper_arm_link"
+      - "wrist_1_link"
+      - "wrist_2_link"
+      - "wrist_3_link"
+      - "tool_mount"
+      - "steering_3"
+      - "steering_2"
+      - "steering"
+      - "forearm_clip_1"
+      - "forearm_clip_2"
+      - "wheel"
+      - "wheel_2"
+      - "wheel_3"
+      - "upperarm_clip"
+    forearm_link:
+      - "liftkit_mid"
+      - "liftkit_top"
+      - "base_link_inertia"
+      - "upper_arm_link"
+      - "wrist_1_link"
+      - "wrist_2_link"
+      - "steering_3"
+      - "steering_2"
+      - "steering"
+      - "forearm_clip_1"
+      - "forearm_clip_2"
+      - "wheel"
+      - "wheel_2"
+      - "wheel_3"
+      - "upperarm_clip"
+    wrist_1_link:
+      - "liftkit_mid"
+      - "liftkit_top"
+      - "base_link_inertia"
+      - "shoulder_link"
+      - "forearm_link"
+      - "wrist_2_link"
+      - "wrist_3_link"
+      - "tool_mount"
+      - "steering_3"
+      - "steering_2"
+      - "steering"
+      - "forearm_clip_1"
+      - "forearm_clip_2"
+      - "wheel"
+      - "wheel_2"
+      - "wheel_3"
+      - "upperarm_clip"
+    wrist_2_link:
+      - "liftkit_mid"
+      - "liftkit_top"
+      - "base_link_inertia"
+      - "shoulder_link"
+      - "upper_arm_link"
+      - "forearm_link"
+      - "wrist_1_link"
+      - "wrist_3_link"
+      - "tool_mount"
+      - "steering_3"
+      - "steering_2"
+      - "steering"
+      - "forearm_clip_1"
+      - "forearm_clip_2"
+      - "wheel"
+      - "wheel_2"
+      - "wheel_3"
+      - "upperarm_clip"
+    wrist_3_link:
+      - "liftkit_mid"
+      - "liftkit_top"
+      - "base_link_inertia"
+      - "shoulder_link"
+      - "upper_arm_link"
+      - "wrist_1_link"
+      - "wrist_2_link"
+      - "tool_mount"
+      - "steering_3"
+      - "steering_2"
+      - "steering"
+      - "forearm_clip_1"
+      - "forearm_clip_2"
+      - "wheel"
+      - "wheel_2"
+      - "wheel_3"
+      - "upperarm_clip"
+    tool_mount:
+      - "liftkit_mid"
+      - "liftkit_top"
+      - "base_link_inertia"
+      - "shoulder_link"
+      - "upper_arm_link"
+      - "wrist_1_link"
+      - "wrist_2_link"
+      - "wrist_3_link"
+      - "steering_3"
+      - "steering_2"
+      - "steering"
+      - "forearm_clip_2"
+      - "wheel"
+      - "wheel_2"
+      - "wheel_3"
+      - "upperarm_clip"
+    steering_3:
+      - "liftkit_mid"
+      - "liftkit_top"
+      - "base_link_inertia"
+      - "shoulder_link"
+      - "upper_arm_link"
+      - "forearm_link"
+      - "wrist_1_link"
+      - "wrist_2_link"
+      - "wrist_3_link"
+      - "tool_mount"
+      - "base_link"
+      - "steering_2"
+      - "steering"
+      - "forearm_clip_1"
+      - "forearm_clip_2"
+      - "wheel"
+      - "wheel_2"
+      - "wheel_3"
+      - "upperarm_clip"
+    steering_2:
+      - "liftkit_mid"
+      - "liftkit_top"
+      - "base_link_inertia"
+      - "shoulder_link"
+      - "upper_arm_link"
+      - "forearm_link"
+      - "wrist_1_link"
+      - "wrist_2_link"
+      - "wrist_3_link"
+      - "tool_mount"
+      - "steering_3"
+      - "base_link"
+      - "steering"
+      - "forearm_clip_1"
+      - "forearm_clip_2"
+      - "wheel"
+      - "wheel_2"
+      - "wheel_3"
+      - "upperarm_clip"
+    steering:
+      - "liftkit_mid"
+      - "liftkit_top"
+      - "base_link_inertia"
+      - "shoulder_link"
+      - "upper_arm_link"
+      - "forearm_link"
+      - "wrist_1_link"
+      - "wrist_2_link"
+      - "wrist_3_link"
+      - "tool_mount"
+      - "steering_3"
+      - "steering_2"
+      - "base_link"
+      - "forearm_clip_1"
+      - "forearm_clip_2"
+      - "wheel"
+      - "wheel_2"
+      - "wheel_3"
+      - "upperarm_clip"
+    forearm_clip_1:
+      - "shoulder_link"
+      - "upper_arm_link"
+      - "forearm_link"
+      - "wrist_1_link"
+      - "wrist_2_link"
+      - "wrist_3_link"
+      - "steering_3"
+      - "steering_2"
+      - "steering"
+      - "forearm_clip_2"
+      - "wheel"
+      - "wheel_2"
+      - "wheel_3"
+      - "upperarm_clip"
+    forearm_clip_2:
+      - "shoulder_link"
+      - "upper_arm_link"
+      - "forearm_link"
+      - "wrist_1_link"
+      - "wrist_2_link"
+      - "wrist_3_link"
+      - "steering_3"
+      - "steering_2"
+      - "steering"
+      - "forearm_clip_1"
+      - "wheel"
+      - "wheel_2"
+      - "wheel_3"
+      - "upperarm_clip"
+    upper_arm_clip:
+      - "liftkit_mid"
+      - "base_link_inertia"
+      - "shoulder_link"
+      - "upper_arm_link"
+      - "forearm_link"
+      - "wrist_1_link"
+      - "wrist_2_link"
+      - "wrist_3_link"
+      - "tool_mount"
+      - "steering_3"
+      - "steering_2"
+      - "steering"
+      - "forearm_clip_1"
+      - "wheel"
+      - "wheel_2"
+      - "wheel_3"
+      - "forearm_clip_2"
+    wheel:
+      - "wheel_2"
+      - "wheel_3"
+      - "upperarm_clip"
+      - "liftkit_mid"
+      - "liftkit_top"
+      - "base_link_inertia"
+      - "shoulder_link"
+      - "upper_arm_link"
+      - "forearm_link"
+      - "wrist_1_link"
+      - "wrist_2_link"
+      - "wrist_3_link"
+      - "tool_mount"
+      - "steering_3"
+      - "steering_2"
+      - "steering"
+      - "forearm_clip_1"
+      - "base_link"
+      - "forearm_clip_2"
+    wheel_2:
+      - "wheel"
+      - "wheel_3"
+      - "upperarm_clip"
+      - "liftkit_mid"
+      - "liftkit_top"
+      - "base_link_inertia"
+      - "shoulder_link"
+      - "upper_arm_link"
+      - "forearm_link"
+      - "wrist_1_link"
+      - "wrist_2_link"
+      - "wrist_3_link"
+      - "tool_mount"
+      - "steering_3"
+      - "steering_2"
+      - "steering"
+      - "forearm_clip_1"
+      - "base_link"
+      - "forearm_clip_2"
+    wheel_3:
+      - "wheel_2"
+      - "wheel"
+      - "upperarm_clip"
+      - "liftkit_mid"
+      - "liftkit_top"
+      - "base_link_inertia"
+      - "shoulder_link"
+      - "upper_arm_link"
+      - "forearm_link"
+      - "wrist_1_link"
+      - "wrist_2_link"
+      - "wrist_3_link"
+      - "tool_mount"
+      - "steering_3"
+      - "steering_2"
+      - "steering"
+      - "forearm_clip_1"
+      - "base_link"
+      - "forearm_clip_2"
+    upper_arm_link:
+      - "wheel_2"
+      - "wheel_3"
+      - "wheel"
+      - "liftkit_mid"
+      - "liftkit_top"
+      - "arm_mount"
+      - "arm_base_link"
+      - "base_link_inertia"
+      - "shoulder_link"
+      - "forearm_link"
+      - "wrist_1_link"
+      - "wrist_2_link"
+      - "wrist_3_link"
+      - "flange"
+      - "flange_mount"
+      - "tool_mount"
+      - "steering_3"
+      - "steering_2"
+      - "steering"
+      - "base_footprint"
+      - "dock_frame"
+      - "livox_amr_imu_mount"
+      - "lidar_nav_mount"
+      - "lidarfl_mount"
+      - "lidarfr_mount"
+      - "lidarrl_mount"
+      - "lidarrr_mount"
+      - "fisheye_mount"
+      - "fisheye_optical"
+      - "base"
+      - "forearm_clip_1"
+      - "forearm_clip_2"
+
+geometry:
+  auto_generated_collision_sphere_group:
+    spheres:
+      base_link:
+        - center: [0.192, -0.126, 0.476]
+          radius: 0.2465
+        - center: [0.041, 0.118, -0.077]
+          radius: 0.1906
+        - center: [0.041, -0.162, -0.15]
+          radius: 0.1906
+        - center: [0.106, -0.167, 0.629]
+          radius: 0.2186
+        - center: [-0.289, 0.204, -0.063]
+          radius: 0.1477
+        - center: [-0.287, -0.083, 0.11]
+          radius: 0.1461
+        - center: [-0.287, -0.085, -0.203]
+          radius: 0.1456
+        - center: [-0.288, 0.102, 0.248]
+          radius: 0.1472
+        - center: [0.022, -0.032, 0.067]
+          radius: 0.1729
+        - center: [0.04, -0.045, 0.42]
+          radius: 0.1901
+        - center: [0.087, 0.239, 0.096]
+          radius: 0.1434
+        - center: [0.081, -0.23, 0.074]
+          radius: 0.1504
+        - center: [0.04, 0.151, -0.151]
+          radius: 0.1906
+        - center: [-0.276, -0.145, 0.27]
+          radius: 0.1348
+        - center: [0.337, 0.293, -0.091]
+          radius: 0.115
+        - center: [-0.3, 0.155, -0.231]
+          radius: 0.1354
+        - center: [-0.279, -0.078, 0.512]
+          radius: 0.1107
+        - center: [0.329, 0.193, 0.084]
+          radius: 0.1074
+        - center: [0.326, -0.247, -0.196]
+          radius: 0.1037
+        - center: [0.324, -0.202, 0.031]
+          radius: 0.1026
+        - center: [0.333, 0.123, -0.157]
+          radius: 0.1112
+        - center: [0.33, 0.021, 0.052]
+          radius: 0.0994
+        - center: [0.226, 0.001, 0.408]
+          radius: 0.1783
+        - center: [0.078, -0.168, 0.446]
+          radius: 0.2159
+        - center: [-0.287, -0.128, 0.01]
+          radius: 0.1456
+        - center: [-0.283, -0.012, 0.745]
+          radius: 0.0924
+        - center: [-0.299, 0.176, 0.142]
+          radius: 0.1364
+        - center: [0.329, 0.213, -0.253]
+          radius: 0.1074
+        - center: [-0.015, 0.068, 0.38]
+          radius: 0.1354
+        - center: [0.291, -0.242, 0.375]
+          radius: 0.1402
+        - center: [0.324, -0.261, 0.104]
+          radius: 0.1015
+        - center: [0.188, -0.172, 0.611]
+          radius: 0.2137
+        - center: [-0.268, 0.252, -0.202]
+          radius: 0.1273
+        - center: [0.04, 0.026, -0.169]
+          radius: 0.1906
+        - center: [-0.023, 0.256, 0.028]
+          radius: 0.1268
+        - center: [0.051, -0.176, 0.64]
+          radius: 0.2019
+        - center: [-0.028, -0.253, -0.233]
+          radius: 0.1225
+        - center: [-0.015, -0.245, 0.047]
+          radius: 0.1354
+        - center: [0.327, 0.277, 0.078]
+          radius: 0.1053
+        - center: [-0.287, 0.005, 0.901]
+          radius: 0.0752
+        - center: [0.331, -0.209, -0.264]
+          radius: 0.0989
+        - center: [-0.223, -0.259, -0.147]
+          radius: 0.0817
+        - center: [0.326, -0.275, -0.075]
+          radius: 0.1037
+        - center: [-0.288, 0.085, 0.002]
+          radius: 0.1472
+        - center: [-0.205, -0.317, 0.581]
+          radius: 0.0645
+        - center: [0.048, 0.099, 0.056]
+          radius: 0.1831
+        - center: [0.152, -0.295, -0.275]
+          radius: 0.079
+        - center: [-0.338, -0.315, 0.657]
+          radius: 0.065
+        - center: [-0.231, -0.161, 0.53]
+          radius: 0.0903
+        - center: [-0.221, -0.278, 0.273]
+          radius: 0.0806
+        - center: [-0.367, -0.307, 0.463]
+          radius: 0.0618
+        - center: [0.399, 0.365, -0.273]
+          radius: 0.0634
+        - center: [0.013, -0.05, 0.545]
+          radius: 0.1633
+        - center: [-0.233, -0.311, -0.032]
+          radius: 0.0699
+        - center: [-0.313, -0.108, 0.511]
+          radius: 0.1096
+        - center: [-0.004, 0.231, -0.153]
+          radius: 0.1466
+        - center: [0.117, 0.222, -0.246]
+          radius: 0.1144
+        - center: [0.337, 0.14, 0.147]
+          radius: 0.0919
+        - center: [0.306, -0.153, -0.112]
+          radius: 0.0838
+        - center: [-0.068, -0.26, 0.156]
+          radius: 0.0828
+        - center: [-0.298, 0.02, 0.275]
+          radius: 0.1359
+        - center: [-0.213, -0.319, 0.671]
+          radius: 0.0618
+        - center: [-0.329, 0.277, -0.221]
+          radius: 0.108
+        - center: [0.321, -0.167, 0.091]
+          radius: 0.0983
+        - center: [-0.403, -0.372, -0.039]
+          radius: 0.0522
+        - center: [-0.213, -0.266, -0.245]
+          radius: 0.072
+        - center: [-0.386, -0.327, 1.313]
+          radius: 0.0489
+        - center: [0.052, -0.199, -0.064]
+          radius: 0.1799
+        - center: [0.314, 0.009, 0.345]
+          radius: 0.115
+        - center: [0.018, -0.283, 0.329]
+          radius: 0.0989
+        - center: [0.282, 0.004, -0.172]
+          radius: 0.0602
+        - center: [0.237, -0.095, 0.634]
+          radius: 0.1617
+        - center: [-0.33, -0.145, -0.26]
+          radius: 0.1015
+        - center: [-0.254, -0.031, 0.904]
+          radius: 0.0715
+        - center: [-0.404, -0.377, -0.247]
+          radius: 0.0506
+        - center: [0.026, -0.118, 0.654]
+          radius: 0.1729
+        - center: [-0.082, 0.307, -0.259]
+          radius: 0.0683
+        - center: [0.067, 0.067, 0.366]
+          radius: 0.1359
+        - center: [0.24, -0.056, 0.479]
+          radius: 0.1982
+        - center: [0.005, -0.228, 0.489]
+          radius: 0.1558
+        - center: [-0.014, -0.239, 0.69]
+          radius: 0.1359
+        - center: [-0.321, 0.267, -0.099]
+          radius: 0.116
+        - center: [0.277, -0.244, 0.542]
+          radius: 0.1397
+        - center: [-0.316, 0.071, -0.247]
+          radius: 0.1187
+        - center: [0.334, -0.309, -0.302]
+          radius: 0.0645
+        - center: [-0.287, -0.121, 0.146]
+          radius: 0.1456
+        - center: [-0.241, 0.245, 0.067]
+          radius: 0.0999
+        - center: [0.143, 0.293, 0.005]
+          radius: 0.0887
+        - center: [0.302, 0.006, 0.122]
+          radius: 0.0806
+        - center: [-0.033, 0.122, -0.244]
+          radius: 0.1176
+      liftkit_mid:
+        - center: [-0.002, -0.0, -0.069]
+          radius: 0.07
+        - center: [0.0, -0.0, -0.839]
+          radius: 0.07
+        - center: [-0.002, -0.0, -0.223]
+          radius: 0.07
+        - center: [-0.001, -0.0, -0.377]
+          radius: 0.07
+        - center: [-0.001, -0.0, -0.531]
+          radius: 0.07
+        - center: [-0.0, -0.0, -0.685]
+          radius: 0.07
+      liftkit_top:
+        - center: [0.0, 0.0, -0.632]
+          radius: 0.0755
+        - center: [0.423, 0.025, -0.08]
+          radius: 0.0748
+        - center: [-0.025, -0.007, -0.255]
+          radius: 0.0735
+        - center: [-0.006, -0.006, -0.866]
+          radius: 0.0695
+        - center: [-0.055, -0.09, -0.124]
+          radius: 0.0675
+        - center: [0.059, 0.015, -0.126]
+          radius: 0.0655
+        - center: [0.321, 0.042, -0.182]
+          radius: 0.0669
+        - center: [0.069, 0.01, -0.327]
+          radius: 0.0655
+        - center: [0.01, -0.011, -0.493]
+          radius: 0.0649
+        - center: [0.005, 0.005, -0.769]
+          radius: 0.0702
+        - center: [0.394, 0.014, 0.053]
+          radius: 0.0629
+        - center: [0.081, -0.095, -0.125]
+          radius: 0.0649
+        - center: [0.302, 0.016, -0.09]
+          radius: 0.0662
+        - center: [-0.095, 0.025, -0.132]
+          radius: 0.0596
+        - center: [0.298, -0.098, -0.02]
+          radius: 0.0576
+        - center: [0.421, -0.098, -0.039]
+          radius: 0.0576
+        - center: [0.368, 0.062, -0.284]
+          radius: 0.0556
+        - center: [0.024, 0.101, -0.118]
+          radius: 0.0589
+        - center: [0.409, 0.037, -0.166]
+          radius: 0.0702
+        - center: [0.273, 0.067, -0.311]
+          radius: 0.0523
+        - center: [-0.098, -0.037, -0.334]
+          radius: 0.0497
+        - center: [0.258, 0.001, -0.003]
+          radius: 0.0517
+        - center: [0.224, 0.036, -0.205]
+          radius: 0.0497
+        - center: [0.098, 0.114, -0.327]
+          radius: 0.047
+        - center: [-0.1, 0.115, -0.313]
+          radius: 0.0464
+        - center: [0.452, 0.011, 0.058]
+          radius: 0.0583
+        - center: [0.2, 0.016, -0.122]
+          radius: 0.045
+        - center: [-0.105, 0.111, -0.131]
+          radius: 0.049
+        - center: [0.028, -0.066, -0.022]
+          radius: 0.0384
+        - center: [0.026, 0.115, -0.345]
+          radius: 0.0457
+        - center: [0.271, -0.098, -0.06]
+          radius: 0.0576
+        - center: [0.117, -0.018, -0.027]
+          radius: 0.0397
+        - center: [0.06, 0.117, -0.257]
+          radius: 0.0431
+        - center: [0.116, 0.134, -0.027]
+          radius: 0.0397
+        - center: [0.1, 0.053, -0.133]
+          radius: 0.0583
+        - center: [0.339, 0.008, 0.04]
+          radius: 0.0576
+        - center: [-0.033, 0.118, -0.237]
+          radius: 0.0411
+        - center: [0.03, 0.114, -0.023]
+          radius: 0.0391
+        - center: [0.017, 0.004, -0.321]
+          radius: 0.0715
+        - center: [0.432, 0.071, -0.302]
+          radius: 0.0477
+        - center: [-0.037, 0.032, -0.022]
+          radius: 0.0378
+        - center: [-0.021, -0.021, -0.456]
+          radius: 0.0543
+        - center: [-0.093, -0.096, -0.022]
+          radius: 0.0378
+        - center: [-0.106, -0.117, -0.349]
+          radius: 0.0391
+        - center: [0.369, 0.003, 0.142]
+          radius: 0.0371
+        - center: [0.034, 0.009, -0.252]
+          radius: 0.0669
+        - center: [0.004, 0.005, -0.883]
+          radius: 0.0708
+        - center: [0.075, 0.067, -0.024]
+          radius: 0.0397
+        - center: [-0.025, 0.129, -0.022]
+          radius: 0.0384
+        - center: [0.359, -0.099, -0.055]
+          radius: 0.0576
+      base_link_inertia:
+        - center: [0.02, 0.009, 0.05]
+          radius: 0.0543
+        - center: [-0.036, -0.005, 0.05]
+          radius: 0.0543
+        - center: [0.018, -0.034, 0.048]
+          radius: 0.0527
+        - center: [-0.01, 0.034, 0.05]
+          radius: 0.0543
+        - center: [0.039, 0.005, 0.047]
+          radius: 0.0521
+      shoulder_link:
+        - center: [0, 0, 0]
+          radius: 0.05
+      upper_arm_link:
+        - center: [-0, -0, 0.18]
+          radius: 0.09
+        - center: [-0.102167, 0, 0.18]
+          radius: 0.05
+        - center: [-0.204333, 0, 0.18]
+          radius: 0.05
+        - center: [-0.3065, 0, 0.18]
+          radius: 0.05
+        - center: [-0.408667, 0, 0.18]
+          radius: 0.05
+        - center: [-0.510833, 0, 0.18]
+          radius: 0.05
+        - center: [-0.613, 0, 0.18]
+          radius: 0.07
+      forearm_link:
+        - center: [-0, 0, 0.03]
+          radius: 0.05
+        - center: [-0.0951667, 0, 0.03]
+          radius: 0.05
+        - center: [-0.190333, 0, 0.03]
+          radius: 0.05
+        - center: [-0.2855, 0, 0.03]
+          radius: 0.05
+        - center: [-0.380667, 0, 0.03]
+          radius: 0.05
+        - center: [-0.475833, 0, 0.03]
+          radius: 0.05
+        - center: [-0.571, -1.19904e-17, 0.03]
+          radius: 0.05
+      forearm_clip_1:
+        - center: [-0.051, -0.004, 0.048]
+          radius: 0.0205
+        - center: [-0.015, -0.002, 0.068]
+          radius: 0.0197
+      forearm_clip_2:
+        - center: [-0.016, 0.006, 0.068]
+          radius: 0.0205
+        - center: [-0.048, 0.008, 0.047]
+          radius: 0.0197
+      wrist_1_link:
+        - center: [0, 0, 0]
+          radius: 0.05
+      wrist_2_link:
+        - center: [0, 0, 0]
+          radius: 0.05
+      wrist_3_link:
+        - center: [0, 0, 0]
+          radius: 0.05
+        - center: [0, 0, 0.06]
+          radius: 0.07
+      tool_mount:
+        - center: [0.003, -0.106, 0.133]
+          radius: 0.0382
+        - center: [0.001, -0.019, 0.096]
+          radius: 0.0373
+        - center: [0.007, -0.018, 0.045]
+          radius: 0.0373
+        - center: [-0.012, -0.018, 0.122]
+          radius: 0.0373
+        - center: [0.03, 0.002, 0.253]
+          radius: 0.0321
+        - center: [-0.02, -0.01, 0.253]
+          radius: 0.0321
+        - center: [-0.01, 0.046, 0.253]
+          radius: 0.0321
+        - center: [-0.056, 0.008, 0.253]
+          radius: 0.0321
+        - center: [0.036, 0.042, 0.253]
+          radius: 0.0321
+        - center: [0.009, -0.053, 0.253]
+          radius: 0.0312
+        - center: [0.009, 0.031, 0.072]
+          radius: 0.0303
+        - center: [0.031, -0.012, 0.134]
+          radius: 0.0312
+        - center: [-0.036, -0.049, 0.254]
+          radius: 0.0303
+        - center: [0.059, -0.011, 0.253]
+          radius: 0.0312
+        - center: [-0.023, -0.012, 0.023]
+          radius: 0.0312
+        - center: [-0.008, 0.032, 0.104]
+          radius: 0.0294
+        - center: [0.009, 0.028, 0.025]
+          radius: 0.0286
+        - center: [-0.056, 0.039, 0.256]
+          radius: 0.0294
+        - center: [0.008, 0.034, 0.168]
+          radius: 0.0277
+        - center: [0.026, -0.013, 0.079]
+          radius: 0.0321
+        - center: [0.011, -0.017, 0.028]
+          radius: 0.0365
+        - center: [-0.012, -0.106, 0.138]
+          radius: 0.0365
+        - center: [0.057, 0.021, 0.254]
+          radius: 0.0312
+        - center: [-0.009, -0.019, 0.051]
+          radius: 0.0373
+        - center: [-0.053, -0.031, 0.254]
+          radius: 0.0303
+        - center: [-0.043, -0.007, 0.093]
+          radius: 0.0259
+        - center: [0.004, 0.063, 0.255]
+          radius: 0.0303
+        - center: [0.012, 0.031, 0.216]
+          radius: 0.0251
+        - center: [0.046, 0.014, 0.215]
+          radius: 0.0251
+        - center: [0.022, -0.036, 0.216]
+          radius: 0.0251
+      upperarm_clip:
+        - center: [-0.021, 0.001, 0.072]
+          radius: 0.0281
+        - center: [-0.05, -0.006, 0.055]
+          radius: 0.0236
+      steering_3:
+        - center: [0.059, -0.001, -0.062]
+          radius: 0.0488
+      wheel_3:
+        - center: [0.001, 0.01, -0.035]
+          radius: 0.0454
+      steering_2:
+        - center: [-0.06, 0.001, -0.048]
+          radius: 0.0495
+      wheel_2:
+        - center: [0.013, 0.015, -0.05]
+          radius: 0.0336
+      steering:
+        - center: [-0.06, 0.001, -0.048]
+          radius: 0.0495
+      wheel:
+        - center: [0.013, 0.015, -0.042]
+          radius: 0.0336
